@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
@@ -8,18 +8,88 @@ class App extends Component {
 
     this.state = {
       termino: '',
+      numero: 123,
+      bool: true,
     };
+    this.handlerChange = this.handlerChange.bind(this);
+  }
+
+  handlerChange(event) {
+    this.setState({
+      termino: event
+    });
+  }
+
+  click() {
+    this.setState({ termino: '' })
+  }
+
+  render() {
+    const { termino } = this.state;
+
+    console.log('valor de variable: ',termino);
+
+    return (
+      <div className="Container">
+        <hr />
+        Buscar: 
+        <input 
+          value={termino}
+          onChange={
+            (event) => this.handlerChange(event.target.value)
+          }
+        />
+        <hr />
+        <h3>Tu termino de busqueda "{termino}" no tiene resultados.</h3>
+        <button
+          onClick={
+            () => this.click()
+          }
+        >Reiniciar</button>
+        <hr />
+        <img src={logo} className="App-logo" alt="logo" />
+      </div>
+    );
+  }
+}
+
+
+
+export default App;
+
+
+
+/* class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      termino: '',
+      numero: 123,
+      bool: true,
+    };
+    this.handlerChange = this.handlerChange.bind(this);
+  }
+
+  handlerChange(event) {
+    this.setState({
+      termino: event
+    });
   }
 
   render() {
     const { termino } = this.state;
 
     return (
-      <Fragment>
+      <div className="Container">
         <hr />
-        Buscar: <input 
-        value={termino}
-        onChange={(e) => this.setState({ termino: e.target.value })}/>
+        Buscar: 
+        <input 
+          value={termino}
+          onChange={
+            (event) => this.handlerChange(event.target.value)
+          }
+        />
         <hr />
         <h3>Tu termino de busqueda "{termino}" no tiene resultados.</h3>
         <button
@@ -27,30 +97,7 @@ class App extends Component {
         >Reiniciar</button>
         <hr />
         <img src={logo} className="App-logo" alt="logo" />
-      </Fragment>
+      </div>
     );
   }
-}
-
-/* function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
 } */
-
-export default App;
